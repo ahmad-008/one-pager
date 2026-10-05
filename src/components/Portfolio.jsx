@@ -149,22 +149,6 @@ function Portfolio() {
 
 
 
-                {/* <h2
-
-                    className="text-3xl font-bold text-center uppercase mb-2"
-
-                >
-                    Our Portfolio
-
-                </h2>
-                <p
-
-                    className="text-center text-gray-500 mb-8"
-
-                >
-                    This is Photoshop's version of Lorem Ipsum. Proin gravida
-
-                </p>    */}
                 
                 <ul className="flex flex-wrap justify-center gap-[5px] py-[26px] border-t border-b border-[#d2d2d2] mb-[30px]"   >
                     {categories.map((cat) => (
@@ -198,54 +182,6 @@ function Portfolio() {
                 </ul>
 
 
-                {/* <ul className="flex justify-center gap-8 py-4 border-t border-b border-gray-300 mb-10">
-
-                    <li>
-                        <button
-                            onClick={() => setActiveCategory('All')}
-                            className={activeCategory === 'All' ? 'bg-brand text-white px-3 py-1' : 'text-gray-700'}
-                        >
-                            All
-                        </button>
-                    </li>
-
-                    <li>
-                        <button
-                            onClick={() => setActiveCategory('Web Design')}
-                            className={activeCategory === 'Web Design' ? 'bg-brand text-white px-3 py-1' : 'text-gray-700'}
-                        >
-                            Web Design
-                        </button>
-                    </li>
-
-                    <li>
-                        <button
-                            onClick={() => setActiveCategory('Photography')}
-                            className={activeCategory === 'Photography' ? 'bg-brand text-white px-3 py-1' : 'text-gray-700'}
-                        >
-                            Photography
-                        </button>
-                    </li>
-
-                    <li>
-                        <button
-                            onClick={() => setActiveCategory('Illustration')}
-                            className={activeCategory === 'Illustration' ? 'bg-brand text-white px-3 py-1' : 'text-gray-700'}
-                        >
-                            Illustration
-                        </button>
-                    </li>
-
-                    <li>
-                        <button
-                            onClick={() => setActiveCategory('Branding')}
-                            className={activeCategory === 'Branding' ? 'bg-brand text-white px-3 py-1' : 'text-gray-700'}
-                        >
-                            Branding
-                        </button>
-                    </li>
-
-                </ul> */}
 
                 <div className="flex gap-[30px]">
                     {columns.map((column, colIndex)=> ( 

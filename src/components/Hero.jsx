@@ -100,14 +100,14 @@ function Hero() {
             </div>
 
             <button onClick={prev}
-                className="absolute left-[7px] min-[992px]:left-[70px] top-1/2 -translate-y-1/2 z-20 text-[30px] text-bold"
+                className="absolute left-[7px] min-[992px]:left-[70px] top-1/2 -translate-y-1/2 z-20 text-[30px]"
             >
                 <FaArrowLeft />
 
             </button>
 
             <button onClick={next}
-                className="absolute right-[7px] min-[992px]:right-[70px] top-1/2 -translate-y-1/2 z-20 text-[30px] text-bold"
+                className="absolute right-[7px] min-[992px]:right-[70px] top-1/2 -translate-y-1/2 z-20 text-[30px]"
             >
                 <FaArrowRight />
 

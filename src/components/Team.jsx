@@ -49,7 +49,7 @@ const next = () => {
 
         <section  id="team" 
         style={{ backgroundImage : `url(${teamBg})`}}
-        className="relative bg-cover bg-center bg-[#262b36] pt-[100px] pb-[35px]" >
+        className="relative bg-cover bg-center pt-[100px] pb-[35px]" >
             
             <button
                 onClick={prev}
