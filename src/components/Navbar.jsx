@@ -15,6 +15,19 @@ const navLinks = [
 
 function Navbar() {
 
+    const handleNavClick = (e, href) => {
+        e.preventDefault();
+
+        const el = document.querySelector(href);
+        if (!el) return;
+
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({top});
+
+    };
+
+
+
     const [isOpen, setIsOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('#home');
 
@@ -48,8 +61,8 @@ function Navbar() {
             <div className="px-0 min-[992px]:px-4" >
                 <div className="flex items-center justify-between h-20">
 
-                    <a href="#home" className="py-5 px-4">
-                        <img src={logo} alt="onepager" className="max-w-[300px] md:max-w-full" />
+                    <a href="#home" onClick={(e)=> handleNavClick(e, '#home')}  className="py-5 px-4">
+                        <img src={logo} alt="onepager"  className="max-w-[300px] md:max-w-full" />
                     </a>
 
 
@@ -58,7 +71,8 @@ function Navbar() {
                             const isActive = activeSection === link.href;
                             return (
 
-                                <a
+                                <a 
+                                    onClick={(e)=> handleNavClick(e, link.href)}
                                     key={link.href}
                                     href={link.href}
                                     className={`group relative uppercase md:text-[13px] md:px-1.5 md:py-3 min-[992px]:text-[16px] min-[992px]:p-[11px] min-[1200px]:text-[18px] min-[1200px]:px-4 min-[1200px]:py-3 ${isActive ? 'text-white' : 'text-[#010000] hover:text-white'}`}
@@ -94,7 +108,10 @@ function Navbar() {
                                 <a
                                     key={link.href}
                                     href={link.href}
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) =>{
+                                        handleNavClick(e, link.href);
+                                        setIsOpen(false);
+                                    } }
                                     className={`text-[17px] uppercase p-1.5 ml-[30px] ${isActive ? 'text-brand' : 'text-[#010000] hover:text-brand'}`}
                                 >
                                     {link.label}
