@@ -35,7 +35,7 @@ function Navbar() {
     useEffect(()=>{
         const onScroll = () => {
             const atBottom = 
-                window.innerHeight + window.scrollY >= documentElement.scrollHeight -2;
+                window.innerHeight + window.scrollY >= document.documentElement.scrollHeight -2;
 
             if (atBottom) {
                 setActiveSection(navLinks[navLinks.length -1].href);
@@ -136,8 +136,6 @@ function Navbar() {
 
 
                 </div>
-
-
 
                 {isOpen && (
                     <nav className="md:hidden flex flex-col gap-[0.1px] pt-6 pb-6">
