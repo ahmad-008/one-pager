@@ -34,7 +34,7 @@ function Contact () {
                                 </p>
                             </div>
                             
-                           <ul className="flex flex-wrap gap-x-5 text-[14px] text-white leading-[22px] " > 
+                           <ul className="flex flex-wrap gap-x-5 text-[14px] text-white leading-[22px] mb-[35px] min-[992px]:mb-0 " > 
                                 <li className="flex items-center gap-2" >
                                     <FaHome className="text-[17px]" />
                                     lorem ipsum street
@@ -60,7 +60,7 @@ function Contact () {
                             
                         </div>
                         
-                    <form className="grid grid-cols-1 sm:grid-cols-2 gap-x-2.5" >
+                    <form className="grid grid-cols-1 md:grid-cols-2 gap-x-2.5" >
 
                         <div>
                             <div className="relative pl-[58px]">
@@ -122,7 +122,7 @@ function Contact () {
 
 
                         </div>
-                            <div>
+                            <div className="flex flex-col" >
                                     <textarea
                                         placeholder="Message"
                                         className="w-full h-[126px] text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] mb-2.5 outline-none"

@@ -15,6 +15,8 @@ import modal1Img from "../assets/portfolio/modal1.jpg";
 import modal2Img from "../assets/portfolio/modal2.jpg";
 import modal3Img from "../assets/portfolio/modal3.jpg";
 import SectionTitle from "./SectionTitle";
+import { FaSearch, FaRegFile, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 
 
 
@@ -88,6 +90,21 @@ function Portfolio() {
         return () => window.removeEventListener('resize', updateColumns);
     }, [] );
 
+    useEffect(()=>{
+
+        if (isModalOpen) {
+            document.body.style.overflow ='hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+
+
+    }, [isModalOpen]);
+
 
 
 
@@ -156,9 +173,11 @@ function Portfolio() {
                             <button
 
                                 onClick={() => setActiveCategory(cat)}
-                                className={`whitespace-nowrap text-[18px] px-[15px] py-1.5 ${activeCategory === cat ? 'bg-brand text-white' : 'text-black'}`}
+                                className={`group relative whitespace-nowrap text-[18px] px-[15px] py-1.5 
+                                ${activeCategory === cat ? ' text-white' : 'text-black hover:text-white'}`}
                             >
-                            {cat}
+                            <span className={`absolute inset-0 bg-brand -skew-x-[25deg] ${activeCategory === cat ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}></span>
+                            <span className="relative" >{cat}</span>
 
                             </button>
 
@@ -253,10 +272,8 @@ function Portfolio() {
                                         rel="noopener noreferrer"
                                         className="w-9 h-9 -skew-x-12 bg-white text-brand flex items-center justify-center"
                                     >
-                                        <svg className="w-4 h-4 skew-x-12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                            <circle cx="11" cy="11" r="7" />
-                                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                                        </svg>
+                                        <FaSearch className="w-4 h-4 skew-x-12" />
+
 
                                     </a>
 
@@ -264,10 +281,8 @@ function Portfolio() {
                                         onClick={() => setIsModalOpen(true)}
                                         className="w-9 h-9 -skew-x-12 bg-white text-brand flex items-center justify-center"
                                     >
-                                        <svg className="w-4 h-4 skew-x-12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                            <path d="M6 2h9l5 5v15H6z" />
-                                            <path d="M14 2v5h5" />
-                                        </svg>
+                                        <FaRegFile className="w-4 h-4 skew-x-12" />
+
                                     </button>
 
                                 </div>
@@ -283,7 +298,7 @@ function Portfolio() {
                 {isModalOpen && (
                     <div
                         onClick={() => setIsModalOpen(false)}
-                        className="fixed inset-0 z-[60] bg-[rgba(0,0,0,0.8)] flex items-center justify-center overflow-y-auto p-4 "
+                        className="fixed inset-0 z-[60] bg-[rgba(0,0,0,0.8)] flex items-center justify-center overflow-y-auto p-4  "
                     >
 
 
@@ -294,7 +309,8 @@ function Portfolio() {
                                 onClick={() => setIsModalOpen(false)}
                                 className="absolute top-9 right-0 w-11 h-11 text-[#c2c2c2] text-[28px] opacity-65 hover:opacity-100"
                             >
-                                &times;
+                                <IoClose/>
+
                             </button>      
  
                             <div
@@ -308,14 +324,14 @@ function Portfolio() {
                                         onClick={prevModalImage}
                                         className="absolute left-[7px] top-1/2 -translate-y-1/2 text-white text-[30px] leading-none"
                                     >
-                                        &lsaquo;
+                                        <FaArrowLeft/>
                                     </button>
 
                                     <button
                                         onClick={nextModalImage}
                                         className="absolute right-[7px] top-1/2 -translate-y-1/2 text-white text-[30px] leading-none"
                                     >
-                                        &rsaquo;
+                                        <FaArrowRight/>
                                     </button>
 
 
