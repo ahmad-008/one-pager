@@ -31,29 +31,68 @@ function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('#home');
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection('#' + entry.target.id);
-                    }
-                });
-            },
-            { rootMargin: '-100px 0px -70% 0px' }
 
-        );
+    useEffect(()=>{
+        const onScroll = () => {
+            const atBottom = 
+                window.innerHeight + window.scrollY >= documentElement.scrollHeight -2;
 
-        navLinks.forEach((link) => {
-            const el = document.querySelector(link.href);
-            if (el) observer.observe(el);
-        });
+            if (atBottom) {
+                setActiveSection(navLinks[navLinks.length -1].href);
+                return;
+            }    
 
-        return () => observer.disconnect();
+            let current = navLinks[0].href;
+
+            for (const link of navLinks){
+                const el = document.querySelector(link.href);
+                if (!el) continue;
+
+                if (el.getBoundingClientRect().top <= 120){
+                    current = link.href;
+                }
+
+
+            }
+
+            setActiveSection(current);
+
+
+        };
+
+        window.addEventListener('scroll', onScroll);
+        onScroll();
+
+        return () => window.removeEventListener('scroll', onScroll);
 
 
 
     }, []);
+
+
+    // useEffect(() => {
+    //     const observer = new IntersectionObserver(
+    //         (entries) => {
+    //             entries.forEach((entry) => {
+    //                 if (entry.isIntersecting) {
+    //                     setActiveSection('#' + entry.target.id);
+    //                 }
+    //             });
+    //         },
+    //         { rootMargin: '-100px 0px -70% 0px' }
+
+    //     );
+
+    //     navLinks.forEach((link) => {
+    //         const el = document.querySelector(link.href);
+    //         if (el) observer.observe(el);
+    //     });
+
+    //     return () => observer.disconnect();
+
+
+
+    // }, []);
 
     return (
         <header className="sticky top-0 z-50 bg-white/90 md:bg-white  border-b border-gray-200">
@@ -121,19 +160,9 @@ function Navbar() {
                     </nav>
                 )}
 
-
-
-
-
             </div>
 
-
-
-
-
         </header>
-
-
 
     )
 }
