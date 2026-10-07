@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Environment variables
+.env
+.env.*
+
 # Reference site copy (design source, not part of our build)
 reference
 
