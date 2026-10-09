@@ -2,9 +2,59 @@ import Container from "./Container";
 import SectionTitle from "./SectionTitle";
 import { FaHome, FaPhone, FaEnvelope } from "react-icons/fa";
 import { FaUser, FaRegEnvelope, FaLink } from "react-icons/fa";
+import { useState } from "react";
 
 
 function Contact () {
+
+    const [form, setForm] = useState ({
+        name:'',
+        email:'',
+        website:'',
+        message:'',
+    });
+
+    const [status, setStatus] = useState('');
+    const [feedback, setFeedback] = useState('');
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value});
+    };
+
+    const handleSubmit = async (e) => {
+
+        e.preventDefault();
+
+        setStatus('sending');
+        setFeedback('');
+
+        try{
+            const res = await fetch (`${import.meta.env.VITE_API_URL}/api/contact`,{
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(form),
+            });
+
+            const data = await res.json();
+
+            if(!res.ok){
+                setStatus('error');
+                setFeedback(data.message || 'Something went wrong');
+                return;
+            }
+
+            setStatus('success');
+            setFeedback('Message sent Successfully');
+            setForm ({name:'', email:'', website:'', message:''});
+        } catch (error) {
+            setStatus('error');
+            setFeedback('Could not reach the server');
+        }
+
+    };
+
+    
+
 
     return (
 
@@ -60,12 +110,15 @@ function Contact () {
                             
                         </div>
                         
-                    <form className="grid grid-cols-1 md:grid-cols-2 gap-x-2.5" >
+                    <form onSubmit={handleSubmit}  className="grid grid-cols-1 md:grid-cols-2 gap-x-2.5" >
 
                         <div>
                             <div className="relative pl-[58px]">
                                 <input
                                     type="text"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleChange}
                                     placeholder="Name"
                                     className="w-full text-[14px] text-[#848484] border-[#eaeaea] border border-l-0 p-[18px] mb-2.5 outline-none "
                                 />
@@ -86,6 +139,9 @@ function Contact () {
                             <div className="relative pl-[58px]" >
                                 <input
                                     type="text"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
                                     placeholder="email"
                                     className="w-full text-[14px] text-[#848484] border border-[#eaeaea] border-l-0 p-[18px] mb-2.5 outline-none"
                                 />
@@ -102,6 +158,9 @@ function Contact () {
                              <div className="relative pl-[58px]" >
                                 <input
                                     type="text"
+                                    name="website"
+                                    value={form.website}
+                                    onChange={handleChange}
                                     placeholder="website"
                                     className="w-full text-[14px] text-[#848484] border border-[#eaeaea] border-l-0 p-[18px] mb-2.5 outline-none"
                                 />
@@ -124,6 +183,9 @@ function Contact () {
                         </div>
                             <div className="flex flex-col" >
                                     <textarea
+                                        name="message"
+                                        value={form.message}
+                                        onChange={handleChange}
                                         placeholder="Message"
                                         className="w-full h-[126px] text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] mb-2.5 outline-none"
                                     
@@ -136,12 +198,22 @@ function Contact () {
 
                                       <button
                                             type="submit"
+                                            disabled = {status === 'sending'}
                                            className="w-full text-center text-white text-[14px] uppercase py-[19px] bg-[#1ab5b3] hover:opacity-80"
                                         >
 
-                                            Send Message
+                                           {status === 'sending' ? 'Sending...' : 'Send Message'}
                                         </button>
 
+                                {feedback && (
+                                    <p className={`text-[13px] mt-2 ${status === 'success' ? 'text-brand' : 'text-red-400'}`} >
+
+                                        {feedback}
+                                    </p>
+
+                                )
+
+                                }
 
 
                             </div>
@@ -149,6 +221,7 @@ function Contact () {
 
 
                     </form>
+                    
                     </div>
 
 
