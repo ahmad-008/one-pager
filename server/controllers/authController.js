@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 import generateToken from '../config/generateToken.js';
 
+
 export const signup = async (req, res) => {
 
     try {
@@ -86,5 +87,14 @@ export const login = async (req, res) => {
 
     }
 
+
+};
+
+export const getMe = async (req, res) => {
+
+    res.status(200).json({
+        success: true,
+        data: req.user,
+    });
 
 };
