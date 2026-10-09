@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import contactRoutes from './routes/contactRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 
 dotenv.config();
@@ -18,6 +19,7 @@ app.get('/',(req, res) => {
 
 
 app.use('/api/contact', contactRoutes);
+app.use('/api/auth', authRoutes)
 
 
 
