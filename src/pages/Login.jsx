@@ -49,7 +49,7 @@ function Login() {
 
         } catch {
             setError('Could not reach the server');
-            toast.error('Could not reach the server');
+            toast.error('Invalid email or password');
 
         } finally {
             setLoading(false);
