@@ -1,13 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
 function Signup () {
 
-    const [form, setForm] = useState({name:'' , email:'', password: ''});
+    const [form, setForm] = useState({name:'' , email:'', password: '', confirmPassword:''});
     const [error, setError] = useState ('');
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -20,11 +22,18 @@ function Signup () {
         setError('');
         setLoading(true);
 
+        if(form.password !== form.confirmPassword){
+            setError('Password does not match');
+            toast.error('Password does not match');
+            setLoading(false);
+            return;
+        }
+
         try{
             const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signup`,{
                 method: 'POST',
                 headers: {'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
+                body: JSON.stringify({name: form.name, email: form.email, password: form.password}),
             });
 
             const data = await res.json();
@@ -85,8 +94,9 @@ function Signup () {
                     
                     />
 
+                <div  className="relative mb-2.5" >
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         value={form.password}
                         onChange={handleChange}
@@ -95,6 +105,39 @@ function Signup () {
                     
                     
                     />
+
+                    <button  
+                        type="button"
+                        onClick={()=> setShowPassword(!showPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[#848484]"
+                    >
+
+                        {showPassword ? <FaEyeSlash/> : <FaEye/>}
+                    </button>
+
+                </div>
+                    
+                <div className="relative mb-2.5" >
+                    <input 
+                        type={showConfirmPassword ? "text" : "password"}
+                        name="confirmPassword"
+                        value={form.confirmPassword}
+                        onChange={handleChange}
+                        placeholder="Confirm Password"
+                        className="w-full text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] mb-2.5 outline-none"
+                    
+                    
+                    />
+
+                    <button
+                        type="button"
+                        onClick={()=> setShowConfirmPassword(!setShowConfirmPassword)}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-[#848484]"
+                    >
+                        {showConfirmPassword ? <FaEyeSlash/> : <FaEye/>}
+                    </button>
+                </div>
+                    
                 
                     {error && <p className="text-red-500 text-[13px] mb-2.5" >{error}</p>}
 
