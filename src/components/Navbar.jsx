@@ -140,7 +140,7 @@ function Navbar() {
                         {user ? (
                             <button     
                                 onClick={handleLogout}
-                                className="relative uppercase md:text-[13px] md:px-1.5 md:py-3 min-[992px]:p-[11px] min-[1200px]:text-[18px] min-[1200px]:px-4 min-[1200px]:py-3 text-white bg-brand -skew-x-[25deg]"
+                                className="relative uppercase md:text-[13px] md:px-1.5 md:py-3 min-[992px]:p-[11px] min-[1200px]:text-[18px] min-[1200px]:px-4 min-[1200px]:py-3 text-white bg-red-500 -skew-x-[25deg]"
                             
                             >
                                 <span className="inline-block skew-x-[25deg]">Logout</span>
@@ -202,7 +202,7 @@ function Navbar() {
                             <button
                             
                                 onClick={()=> {handleLogout(); setIsOpen(false);}}
-                                className="text-[17px] uppercase p-1.5 ml-[30px] text-brand font-bold text-left"
+                                className="text-[17px] uppercase p-1.5 ml-[30px] text-red-500 font-bold text-left"
                             >
                                 Logout
                             </button>
