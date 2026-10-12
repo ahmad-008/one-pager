@@ -13,10 +13,10 @@ export const createContact = async (req, res) => {
             await sendEmail({
                 to: process.env.EMAIL_USER,
                 subject: `New contact from ${name}`,
-                html:`  <p><strong>Name</strong> ${name}</p>
+                html:`  <p><strong>Name:</strong> ${name}</p>
                         <p><strong>Email:</strong> ${email}</p>
                         <p><strong>Website:</strong> ${website || '-'}</p>
-                        <p><strong>Message:</strong> ${message}</p>,
+                        <p><strong>Message:</strong> ${message}</p>
                 `
             });
 

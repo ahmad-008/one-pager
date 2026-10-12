@@ -96,7 +96,7 @@ function Login() {
                             value={form.password}
                             onChange={handleChange}
                             placeholder="Password"
-                            className='w-full text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] mb-2.5 outline-none'
+                            className='w-full text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] pr-12 outline-none'
 
                         />
 

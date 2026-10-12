@@ -44,8 +44,8 @@ function Signup () {
                 return;
             }
 
-            localStorage.setItem('token',data.token);
-            localStorage.setItem('user', JSON.stringify(data.data));
+            // localStorage.setItem('token',data.token);
+            // localStorage.setItem('user', JSON.stringify(data.data));
 
             toast.success('Account created successfully');
             navigate('/login');
@@ -101,7 +101,7 @@ function Signup () {
                         value={form.password}
                         onChange={handleChange}
                         placeholder="Password"
-                        className="w-full text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] mb-2.5 outline-none"
+                        className="w-full text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] pr-12 outline-none"
                     
                     
                     />
@@ -124,14 +124,14 @@ function Signup () {
                         value={form.confirmPassword}
                         onChange={handleChange}
                         placeholder="Confirm Password"
-                        className="w-full text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] mb-2.5 outline-none"
+                        className="w-full text-[14px] text-[#848484] border border-[#eaeaea] p-[18px] pr-12 outline-none"
                     
                     
                     />
 
                     <button
                         type="button"
-                        onClick={()=> setShowConfirmPassword(!setShowConfirmPassword)}
+                        onClick={()=> setShowConfirmPassword(!showConfirmPassword)}
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-[#848484]"
                     >
                         {showConfirmPassword ? <FaEyeSlash/> : <FaEye/>}
