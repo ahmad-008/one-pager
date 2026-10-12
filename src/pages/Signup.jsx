@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 function Signup () {
 
@@ -30,16 +31,19 @@ function Signup () {
 
             if (!res.ok) {
                 setError(data.message || 'Signup failed');
+                toast.error(data.message || 'Signup failed');
                 return;
             }
 
             localStorage.setItem('token',data.token);
             localStorage.setItem('user', JSON.stringify(data.data));
 
+            toast.success('Account created successfully');
             navigate('/login');
 
         } catch {
             setError('Could not reach the server');
+            toast.error('Could not reach the server');
         } finally {
             setLoading(false);
         }

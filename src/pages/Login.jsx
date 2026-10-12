@@ -1,6 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom';
 import { FaHome } from "react-icons/fa";
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 function Login() {
 
@@ -36,16 +37,19 @@ function Login() {
 
             if (!res.ok){
                 setError(data.message || 'Login failed' );
+                toast.error(data.message || 'Login failed');
                 return;
             }
 
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.data));
 
+            toast.success('Logged in successfully');
             navigate('/');
 
         } catch {
             setError('Could not reach the server');
+            toast.error('Could not reach the server');
 
         } finally {
             setLoading(false);

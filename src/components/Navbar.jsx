@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 const navLinks = [
@@ -31,6 +32,16 @@ function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [activeSection, setActiveSection] = useState('#home');
+    const navigate = useNavigate();
+    const [user, setUser] = useState(() => localStorage.getItem('user'));
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        setUser(null);
+        toast.success('Logged out successfully');
+        navigate('/');
+    };
 
 
     useEffect(() => {
@@ -126,7 +137,19 @@ function Navbar() {
                             
                         })}
 
-                        <Link
+                        {user ? (
+                            <button     
+                                onClick={handleLogout}
+                                className="relative uppercase md:text-[13px] md:px-1.5 md:py-3 min-[992px]:p-[11px] min-[1200px]:text-[18px] min-[1200px]:px-4 min-[1200px]:py-3 text-white bg-brand -skew-x-[25deg]"
+                            
+                            >
+                                <span className="inline-block skew-x-[25deg]">Logout</span>
+                            </button>
+
+
+                        ) : (
+
+                            <Link
 
                                 to="/login"
                                 className="relative uppercase md:text-[13px] md:px-1.5 md:py-3 min-[992px]:text-[16px] min-[992px]:p-[11px] min-[1200px]:text-[18px] min-[1200px]:px-4 min-[1200px]:py-3 text-white bg-brand -skew-x-[25deg]"
@@ -134,6 +157,9 @@ function Navbar() {
                                 <span className="inline-block skew-x-[25deg]">Login</span>
 
                             </Link>
+
+                        ) }
+
 
                     </nav>
 
@@ -170,13 +196,28 @@ function Navbar() {
                             
 
                         })}
-                        <Link
+
+                        {user ? (
+
+                            <button
+                            
+                                onClick={()=> {handleLogout(); setIsOpen(false);}}
+                                className="text-[17px] uppercase p-1.5 ml-[30px] text-brand font-bold text-left"
+                            >
+                                Logout
+                            </button>
+
+
+                        ): (
+                             <Link
                                 to="/login"
                                 onClick={() => setIsOpen(false)}
                                 className="text-[17px] uppercase p-1.5 ml-[30px] text-brand font-bold"
                             >
                                 Login
                             </Link>
+                        ) }
+
                     </nav>
                 )}
 
