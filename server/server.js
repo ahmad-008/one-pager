@@ -33,3 +33,5 @@ app.use('/api/auth', authRoutes)
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`)
 });
+
+export default app;
